@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 function ProtectedRoute({ component: Component, permissions, ...rest }) {
   const componentRender = () => Component;

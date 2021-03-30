@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['airbnb', 'airbnb/hooks'],
+  extends: ['airbnb'],
   rules: {
     'no-underscore-dangle': 0,
     'react/jsx-filename-extension': 'off',
