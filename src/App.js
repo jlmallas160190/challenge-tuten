@@ -1,30 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { ADMIN_LAYOUT, AUTH_LAYOUT } from 'base/constants/paths';
+import AdminLayout from 'base/layouts/AdminLayout';
+import AuthLayout from 'base/layouts/AuthLayout';
+import ProtectedRoute from 'config/ProtectedRoute';
+import { createBrowserHistory } from 'history';
 import React from 'react';
+import { Redirect, Router, Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const history = createBrowserHistory();
+
+const App = () => (
+  <>
+    <Router history={history}>
+      <Switch>
+        <Route path={`/${AUTH_LAYOUT}`} component={AuthLayout} />
+        <ProtectedRoute path={`/${ADMIN_LAYOUT}`} component={AdminLayout} permissions="*" />
+        <Redirect from="/" to={`/${ADMIN_LAYOUT}/login`} />
+      </Switch>
+    </Router>
+  </>
+);
 
 export default App;
