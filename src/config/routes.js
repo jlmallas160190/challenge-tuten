@@ -1,5 +1,5 @@
 import { AUTH_LAYOUT } from 'base/constants/paths';
-import AuthenticationContainer from 'base/containers/AuthenticationContainer';
+import AuthenticationContainer from 'auth/containers/AuthenticationContainer';
 
 class TutenRoutes {
   static getDefaultRoutes() {
