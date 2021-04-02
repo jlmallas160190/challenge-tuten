@@ -1,7 +1,7 @@
 import { AUTHENTICATE_REJECTED, AUTHENTICATE_RESOLVED, AUTHENTICATE_START } from './actionsTypes';
 
 const initialState = {
-  tuteData: {},
+  tutenData: {},
   authenticating: false,
 };
 
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         authenticating: false,
-        tuteData: action.payload,
+        tutenData: action.payload,
       };
 
     case AUTHENTICATE_REJECTED:

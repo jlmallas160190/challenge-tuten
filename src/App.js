@@ -1,3 +1,4 @@
+import AlertContainer from 'alerts/containers/AlertContainer';
 import { ADMIN_LAYOUT, AUTH_LAYOUT } from 'base/constants/paths';
 import AdminLayout from 'base/layouts/AdminLayout';
 import AuthLayout from 'base/layouts/AuthLayout';
@@ -21,6 +22,7 @@ const App = () => (
         <Redirect from="/" to={`/${ADMIN_LAYOUT}/dashboard`} />
       </Switch>
     </Router>
+    <AlertContainer />
   </>
 );
 

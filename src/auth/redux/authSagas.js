@@ -1,35 +1,32 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { authenticate, authenticateRejected, authenticateResolved } from './actions';
+import { addAlert, clearFloatingAlert } from 'alerts/actions/index';
+import { ERROR_ALERT } from 'alerts/constants/actionTypes';
+import { setUserLoggedIn } from 'base/utils/helpers';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { v4 as uuidv4 } from 'uuid';
+import { authenticateRejected, authenticateResolved } from './actions';
 import { AUTHENTICATE_START } from './actionsTypes';
+import { autenticateService } from './services';
 
 function* loginHandler({ data }) {
   try {
-    console.log(data);
-    const { data: user } = yield call(authenticate, data);
-
-    if (user.user.type === 'Usuario') {
-      yield put(authenticateResolved(user));
-    } else {
-      yield put(authenticateRejected());
-      // yield put(displayModal({
-      //   type: 'custom',
-      //   content: <ContentModal
-      //     title="¡Usuario incorrecto!"
-      //     text="Por favor ingresá con una cuenta válida. Gracias!"
-      //   />
-      // }));
-    }
+    const user = yield call(() => autenticateService({ method: 'PUT', url: `user/${data.email}`, password: data.password }),);
+    yield put(authenticateResolved(user));
+    setUserLoggedIn(user);
   } catch (e) {
     yield put(
       authenticateRejected('Error al intentar entrar. Revisá los datos e intentalo nuevamente.'),
     );
-    // yield put(displayModal({
-    //   type: 'custom',
-    //   content: <ContentModal
-    //     title="Hubo un error!"
-    //     text="La información no es válida."
-    //   />
-    // }));
+    const id = uuidv4();
+    yield put(
+      addAlert({
+        id,
+        alertMessage: e.response.data,
+        displayType: 'danger',
+        alertType: ERROR_ALERT,
+      }),
+    );
+    yield delay(3000);
+    yield put(clearFloatingAlert(id));
   }
 }
 

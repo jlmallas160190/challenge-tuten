@@ -8,11 +8,9 @@ import {
   WHITE,
   YELLOW,
 } from '../constants/colors';
-import { defaultFont } from './general-style';
 
 const snackbarContentStyle = {
   root: {
-    ...defaultFont,
     flexWrap: 'unset',
     position: 'relative',
     padding: '20px 15px',

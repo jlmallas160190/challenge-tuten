@@ -1,12 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TextField, withStyles } from '@material-ui/core';
-import { authenticate } from 'auth/redux/actions';
+import { authenticateStart } from 'auth/redux/actions';
 import { LoadingStyled } from 'base/ui-components/loadingStyled';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form/dist/index';
+import { Controller, useForm } from 'react-hook-form/dist';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { TextField, withStyles } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -15,6 +18,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 
 import * as yup from 'yup';
+import { ADMIN_LAYOUT } from 'base/constants/paths';
 
 const styles = {
   card: {
@@ -43,7 +47,8 @@ const AuthenticationContainer = (props) => {
       .max(16, 'Muy largo!')
       .required('Este campo es requerido'),
   });
-  const authenticating = useSelector((state) => state.authentication.authenticating);
+  const { authenticating, tutenData } = useSelector((state) => state.authentication);
+  console.log(tutenData);
   const { handleSubmit, control, errors } = useForm({
     shouldUnregister: false,
     resolver: yupResolver(validationSchema),
@@ -53,8 +58,11 @@ const AuthenticationContainer = (props) => {
       password: '',
     },
   });
+  if (tutenData.sessionTokenBck) {
+    return <Redirect to={`/${ADMIN_LAYOUT}`} />;
+  }
 
-  const onSubmit = (values) => dispatch(authenticate(values));
+  const onSubmit = (values) => dispatch(authenticateStart(values));
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card className={classes.card}>

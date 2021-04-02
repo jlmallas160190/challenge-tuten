@@ -1,6 +1,6 @@
 import { AUTHENTICATE_REJECTED, AUTHENTICATE_RESOLVED, AUTHENTICATE_START } from './actionsTypes';
 
-export const authenticate = ({ email, password }) => ({
+export const authenticateStart = ({ email, password }) => ({
   type: AUTHENTICATE_START,
   data: { email, password },
 });
