@@ -1,71 +1,31 @@
-import {
-  GET_PHONE_LINE_OPTIONS,
-  SET_PHONE_LINE_OPTIONS,
-  SEARCH_PHONE_LINES,
-  SET_SEARCH_PHONE_LINES,
-  SUBMIT_PHONE_LINE,
-  SUBMIT_PHONE_LINE_SUCCESS,
-  SUBMIT_PHONE_LINE_ERROR,
-  SUBMIT_PHONE_LINE_PER_EMPLOYEE,
-} from './actionsTypes';
+import { AUTHENTICATE_REJECTED, AUTHENTICATE_RESOLVED, AUTHENTICATE_START } from './actionsTypes';
 
 const initialState = {
-  phonelines: [],
-  phoneLineOptions: {},
-  loading: false,
-  lineLoading: false,
+  tuteData: {},
+  authenticating: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_PHONE_LINE_OPTIONS:
+    case AUTHENTICATE_START:
       return {
         ...state,
-        loading: true,
+        authenticating: true,
       };
 
-    case SET_PHONE_LINE_OPTIONS:
+    case AUTHENTICATE_RESOLVED:
       return {
         ...state,
-        loading: false,
-        phoneLineOptions: action.payload,
+        authenticating: false,
+        tuteData: action.payload,
       };
 
-    case SEARCH_PHONE_LINES:
+    case AUTHENTICATE_REJECTED:
       return {
         ...state,
-        lineLoading: true,
+        authenticating: false,
       };
 
-    case SET_SEARCH_PHONE_LINES:
-      return {
-        ...state,
-        lineLoading: false,
-        phonelines: action.payload,
-      };
-
-    case SUBMIT_PHONE_LINE:
-      return {
-        ...state,
-        submitLoading: true,
-      };
-
-    case SUBMIT_PHONE_LINE_SUCCESS:
-      return {
-        ...state,
-        submitLoading: false,
-      };
-
-    case SUBMIT_PHONE_LINE_ERROR:
-      return {
-        ...state,
-        submitLoading: false,
-      };
-    case SUBMIT_PHONE_LINE_PER_EMPLOYEE:
-      return {
-        ...state,
-        submitLoading: false,
-      };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
+import { DARK_COLOR } from 'base/constants/colors';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { DARK_COLOR } from '../constants/colors';
 
 const StyledLabel = styled.label`
   font-size: ${(props) => props.fontSize};

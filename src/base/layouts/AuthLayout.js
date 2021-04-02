@@ -4,16 +4,15 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 const AuthLayout = () => {
-  const getRoutes = (routes) =>
-    routes.map((prop, key) => {
-      if (prop.collapse) {
-        return getRoutes(prop.views);
-      }
-      if (prop.layout === `/${AUTH_LAYOUT}`) {
-        return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
-      }
-      return null;
-    });
+  const getRoutes = (routes) => routes.map((prop, key) => {
+    if (prop.collapse) {
+      return getRoutes(prop.views);
+    }
+    if (prop.layout === `/${AUTH_LAYOUT}`) {
+      return <Route path={`${prop.layout}${prop.path}`} component={prop.component} key={key} />;
+    }
+    return null;
+  });
 
   const routes = TutenRoutes.getDefaultRoutes();
   return (

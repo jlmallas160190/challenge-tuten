@@ -1,4 +1,4 @@
-import { isUserLoggedIn } from 'base/utils/helper';
+import { isUserLoggedIn } from 'base/utils/helpers';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
@@ -9,18 +9,16 @@ function ProtectedRoute({ component: Component, permissions, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props) =>
-        isUserLoggedIn() ? (
-          <ComponentToRender {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/auth/login',
-              state: { from: props.location },
-            }}
-          />
-        )
-      }
+      render={(props) => (isUserLoggedIn() ? (
+        <ComponentToRender {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/auth/login',
+            state: { from: props.location },
+          }}
+        />
+      ))}
     />
   );
 }
