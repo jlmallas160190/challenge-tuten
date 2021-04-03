@@ -1,10 +1,11 @@
 import { getBookings } from 'booking/redux/actions';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import TutenTable from 'base/components/TutenTable';
 
 const BookingListContainer = () => {
   const dispatch = useDispatch();
@@ -17,11 +18,19 @@ const BookingListContainer = () => {
       setSubscribe(true);
     };
   }, [subscribe, dispatch]);
+  const { bookings, loading } = useSelector((state) => state.booking);
+  const bookingColumns = [
+    { title: 'BookingId', field: 'bookingId' },
+    { title: 'Cliente', field: 'firstName' },
+    { title: 'Fecha de Creación', field: 'bookingTime' },
+  ];
 
   return (
     <Card>
       <CardHeader title="Listado de Reservaciones" />
-      <CardContent />
+      <CardContent>
+        <TutenTable columns={bookingColumns} dataPreFetch={bookings} isLoading={loading} paging />
+      </CardContent>
     </Card>
   );
 };

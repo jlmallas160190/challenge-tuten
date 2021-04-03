@@ -27,7 +27,7 @@ _cd to project file_
 cd challenge-tuten
 ```
 
-\_change the project version node (optional).
+_change the project version node (optional)._
 
 ```
 nvm use

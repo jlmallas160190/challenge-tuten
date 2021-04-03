@@ -10,13 +10,13 @@ import { getBookings } from './services';
 function* getBookingsHandler({ data }) {
   try {
     const user = getUserLoggedIn();
-    yield call(() => getBookings({
+    const result = yield call(() => getBookings({
       method: 'GET',
       url: `user/${data.email}/bookings?current=true`,
       token: user.sessionTokenBck,
       email: user.email,
     }),);
-    yield put(getBookingResolved(user));
+    yield put(getBookingResolved(result));
   } catch (e) {
     yield put(
       getBookingRejected('Error al intentar entrar. Revisá los datos e intentalo nuevamente.'),
