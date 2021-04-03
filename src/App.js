@@ -14,11 +14,7 @@ const App = () => (
     <Router history={history}>
       <Switch>
         <Route path={`/${AUTH_LAYOUT}`} component={AuthLayout} />
-        <ProtectedRoute
-          path={`/${ADMIN_LAYOUT}/dashboard`}
-          component={AdminLayout}
-          permissions="*"
-        />
+        <ProtectedRoute path={`/${ADMIN_LAYOUT}`} component={AdminLayout} permissions="*" />
         <Redirect from="/" to={`/${ADMIN_LAYOUT}/dashboard`} />
       </Switch>
     </Router>

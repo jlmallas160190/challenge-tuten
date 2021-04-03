@@ -1,13 +1,15 @@
+import TutenSidebar from 'base/components/TutenSidebar';
+import { ADMIN_LAYOUT } from 'base/constants/paths';
+import { Content, Drawer } from 'base/styles/layout-style';
+import React from 'react';
+import { Switch } from 'react-router-dom';
+
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import RaffoSidebar from 'base/components/RaffoSidebar';
-import { ADMIN_LAYOUT } from 'base/constants/paths';
-import { Content, Drawer, LogoContainer } from 'base/styles/layout-style';
+
 import ProtectedRoute from 'config/ProtectedRoute';
 import TutenRoutes from 'config/routes';
-import React from 'react';
-import { NavLink, Switch } from 'react-router-dom';
 
 export default function AdminLayout() {
   const routes = TutenRoutes.getAdminRoutes();
@@ -34,12 +36,7 @@ export default function AdminLayout() {
   return (
     <Box display="flex">
       <Drawer variant="permanent" anchor="left">
-        <Box display="flex" justifyContent="center" m={1}>
-          <NavLink to="/">
-            <LogoContainer boxShadow={2} />
-          </NavLink>
-        </Box>
-        <RaffoSidebar routes={routes} />
+        <TutenSidebar routes={routes} />
       </Drawer>
       <Content>
         <Container maxWidth="lg">

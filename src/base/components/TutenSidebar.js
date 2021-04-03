@@ -4,7 +4,7 @@ import { List, Box } from '@material-ui/core';
 import { useLocation } from 'react-router-dom';
 import { SidebarItem, SidebarItemIcon, SidebarLink } from 'base/styles/sidebar-style';
 
-export function RaffoSidebar({ routes }) {
+export function TutenSidebar({ routes }) {
   const location = useLocation();
 
   const generateItemMenu = (route, key) => (
@@ -27,12 +27,12 @@ export function RaffoSidebar({ routes }) {
   return <List>{createLinks()}</List>;
 }
 
-RaffoSidebar.propTypes = {
+TutenSidebar.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.shape()),
 };
 
-RaffoSidebar.defaultProps = {
+TutenSidebar.defaultProps = {
   routes: [],
 };
 
-export default RaffoSidebar;
+export default TutenSidebar;

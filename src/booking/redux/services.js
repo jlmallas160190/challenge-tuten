@@ -1,10 +1,11 @@
 import { createAxios } from 'config/axiosInstance';
 
 const axiosInstance = createAxios;
-export const autenticateService = (params) => axiosInstance({
+export const getBookings = (params) => axiosInstance({
   ...params,
   headers: {
     app: process.env.REACT_APP_TUTEN_APP,
-    password: params.password,
+    token: params.token,
+    adminemail: params.email,
   },
 }).then(({ data }) => data);
