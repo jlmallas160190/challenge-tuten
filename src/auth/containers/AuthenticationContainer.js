@@ -1,11 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { authenticateStart } from 'auth/redux/actions';
-import { LoadingStyled } from 'base/ui-components/loadingStyled';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form/dist';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import { TextField, withStyles } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
@@ -17,12 +15,23 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 
-import * as yup from 'yup';
-import { ADMIN_LAYOUT } from 'base/constants/paths';
+import GridContainer from 'base/ui-components/GridContainer';
+import GridItem from 'base/ui-components/GridItem';
+import { LoadingStyled } from 'base/ui-components/loadingStyled';
 
-const styles = {
+import * as yup from 'yup';
+import { faKey } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const styles = (theme) => ({
   card: {
     minWidth: 275,
+    marginLeft: '4rem',
+    marginRight: '4rem',
+    marginTop: '2rem',
+  },
+  margin: {
+    margin: theme.spacing.unit,
   },
   bullet: {
     display: 'inline-block',
@@ -35,7 +44,7 @@ const styles = {
   pos: {
     marginBottom: 12,
   },
-};
+});
 const AuthenticationContainer = (props) => {
   const { classes } = props;
   const dispatch = useDispatch();
@@ -47,8 +56,7 @@ const AuthenticationContainer = (props) => {
       .max(16, 'Muy largo!')
       .required('Este campo es requerido'),
   });
-  const { authenticating, tutenData } = useSelector((state) => state.authentication);
-  console.log(tutenData);
+  const { authenticating } = useSelector((state) => state.authentication);
   const { handleSubmit, control, errors } = useForm({
     shouldUnregister: false,
     resolver: yupResolver(validationSchema),
@@ -58,9 +66,6 @@ const AuthenticationContainer = (props) => {
       password: '',
     },
   });
-  if (tutenData.sessionTokenBck) {
-    return <Redirect to={`/${ADMIN_LAYOUT}`} />;
-  }
 
   const onSubmit = (values) => dispatch(authenticateStart(values));
   return (
@@ -68,22 +73,35 @@ const AuthenticationContainer = (props) => {
       <Card className={classes.card}>
         <CardHeader title="Tuten" subheader="Auténticación" />
         <CardContent>
-          <Controller name="email" label="Correo" type="email" control={control} as={TextField} />
-          {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
-          <Controller
-            name="password"
-            label="Contraseña"
-            type="password"
-            control={control}
-            as={TextField}
-          />
-          {errors.password && <Alert severity="error">{errors.password.message}</Alert>}
+          <GridContainer>
+            <GridItem xs={12} md={12}>
+              <Controller
+                name="email"
+                label="Correo"
+                type="email"
+                control={control}
+                as={TextField}
+              />
+              {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
+            </GridItem>
+            <GridItem xs={12} md={12}>
+              <Controller
+                name="password"
+                label="Contraseña"
+                type="password"
+                control={control}
+                as={TextField}
+              />
+              {errors.password && <Alert severity="error">{errors.password.message}</Alert>}
+            </GridItem>
+          </GridContainer>
         </CardContent>
         <CardActions>
           <Box display="flex" justifyContent="flex-end" mt={3}>
             <Box position="relative" mr={1}>
               <Button variant="contained" color="primary" disabled={authenticating} type="submit">
-                Guardar
+                <FontAwesomeIcon icon={faKey} />
+                Autenticar
               </Button>
               {authenticating && <LoadingStyled size={24} />}
             </Box>
