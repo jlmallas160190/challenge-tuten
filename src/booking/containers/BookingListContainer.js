@@ -4,8 +4,8 @@ import { getBookings } from 'booking/redux/actions';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form/dist';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { TextField, withStyles } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid';
 import { Alert } from '@material-ui/lab';
 
@@ -23,8 +23,11 @@ import { LoadingStyled } from 'base/ui-components/loadingStyled';
 import * as yup from 'yup';
 import { faSync } from '@fortawesome/free-solid-svg-icons/index';
 import { formatToDate } from 'base/utils/helpers';
+import { style } from 'booking/styles/index';
 
-const BookingListContainer = () => {
+const styles = () => style;
+const BookingListContainer = (props) => {
+  const { classes } = props;
   const dispatch = useDispatch();
   const validationSchema = yup.object().shape({
     email: yup.string().email().label('Email').required('Este campo es requerido'),
@@ -81,7 +84,7 @@ const BookingListContainer = () => {
                     label="Correo"
                     type="email"
                     control={control}
-                    as={TextField}
+                    as={<TextField className={classes.textField} />}
                   />
                   {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
                 </Box>
@@ -97,7 +100,7 @@ const BookingListContainer = () => {
               </StyledFlex>
             </GridItem>
             <GridItem xs={12} md={12}>
-              <div style={{ height: 400, width: '100%' }}>
+              <div style={style.dataGridDiv}>
                 <DataGrid
                   rows={bookings.map((item) => ({ ...item, id: item.bookingId }))}
                   columns={bookingColumns}
@@ -111,4 +114,9 @@ const BookingListContainer = () => {
     </Card>
   );
 };
-export default BookingListContainer;
+
+BookingListContainer.propTypes = {
+  classes: PropTypes.shape().isRequired,
+};
+
+export default withStyles(styles)(BookingListContainer);

@@ -22,29 +22,9 @@ import { LoadingStyled } from 'base/ui-components/loadingStyled';
 import * as yup from 'yup';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { style } from 'auth/styles/index';
 
-const styles = (theme) => ({
-  card: {
-    minWidth: 275,
-    marginLeft: '4rem',
-    marginRight: '4rem',
-    marginTop: '2rem',
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
+const styles = () => style;
 const AuthenticationContainer = (props) => {
   const { classes } = props;
   const dispatch = useDispatch();
@@ -80,7 +60,7 @@ const AuthenticationContainer = (props) => {
                 label="Correo"
                 type="email"
                 control={control}
-                as={TextField}
+                as={<TextField className={classes.textField} />}
               />
               {errors.email && <Alert severity="error">{errors.email.message}</Alert>}
             </GridItem>
@@ -90,7 +70,7 @@ const AuthenticationContainer = (props) => {
                 label="Contraseña"
                 type="password"
                 control={control}
-                as={TextField}
+                as={<TextField className={classes.textField} />}
               />
               {errors.password && <Alert severity="error">{errors.password.message}</Alert>}
             </GridItem>
