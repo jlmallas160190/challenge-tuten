@@ -1,4 +1,9 @@
-import { AUTHENTICATE_REJECTED, AUTHENTICATE_RESOLVED, AUTHENTICATE_START } from './actionsTypes';
+import {
+  AUTHENTICATE_REJECTED,
+  AUTHENTICATE_RESOLVED,
+  AUTHENTICATE_START,
+  LOGOUT,
+} from './actionsTypes';
 
 const initialState = {
   tutenData: {},
@@ -25,7 +30,12 @@ export default (state = initialState, action) => {
         ...state,
         authenticating: false,
       };
-
+    case LOGOUT:
+      return {
+        ...state,
+        tutenData: action.payload,
+        authenticating: false,
+      };
     default:
       return state;
   }
