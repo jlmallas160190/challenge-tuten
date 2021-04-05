@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['airbnb'],
+  extends: ['airbnb', 'plugin:jest/recommended'],
   rules: {
     'no-underscore-dangle': 0,
     'react/jsx-filename-extension': 'off',
@@ -32,6 +32,11 @@ module.exports = {
         depth: 3,
       },
     ],
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
   },
   globals: {
     Atomics: 'readonly',
@@ -51,6 +56,7 @@ module.exports = {
   },
   env: {
     browser: 1,
+    'jest/globals': true,
   },
   settings: {
     'import/extensions': 0,

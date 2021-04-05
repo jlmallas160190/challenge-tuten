@@ -18,7 +18,7 @@ _This project use React. It requires the following for run._
 _clone this project_
 
 ```
-git clone
+git clone [repository via ssh or http]
 ```
 
 _cd to project file_
@@ -56,6 +56,8 @@ _create the .env file in the project root and copy the environment variables fro
 - [PropTypes](https://github.com/facebook/prop-types)](https://github.com/facebook/prop-types) - internal mechanism for adding type-checking to components.
 - [Husky](https://github.com/typicode/husky) - Husky can prevent bad git commit, git push and more 🐶 woof!
 - [ESLint](https://github.com/typicode/husky) - ESLint statically analyzes your code to quickly find problems. ESLint is built into most text editors and you can run ESLint as part of your continuous integration pipeline.
+- [Enzyme](https://www.npmjs.com/package/enzyme) - Enzyme is a JavaScript Testing utility for React that makes it easier to test your React Components' output. You can also manipulate, traverse, and in some ways simulate runtime given the output.
+- [Jest](https://jestjs.io/docs/tutorial-react) - Jest is a JavaScript test runner, that is, a JavaScript library for creating, running, and structuring tests. Jest ships as an NPM package, you can install it in any JavaScript project. Jest is one of the most popular test runner these days, and the default choice for React projects
 
 ## Wiki 📖
 

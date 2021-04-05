@@ -5,7 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 const Dashboard = () => (
   <Card>
-    <CardHeader title="Tuten Challenge" subheader="Panel de Administración" />
+    <CardHeader id="header" title="Tuten Challenge" subheader="Panel de Administración" />
     <CardContent />
   </Card>
 );

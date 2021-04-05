@@ -51,11 +51,12 @@ const AuthenticationContainer = (props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Card className={classes.card}>
-        <CardHeader title="Tuten" subheader="Auténticación" />
+        <CardHeader id="header" title="Tuten" subheader="Auténticación" />
         <CardContent>
           <GridContainer>
             <GridItem xs={12} md={12}>
               <Controller
+                id="email"
                 name="email"
                 label="Correo"
                 type="email"
@@ -66,6 +67,7 @@ const AuthenticationContainer = (props) => {
             </GridItem>
             <GridItem xs={12} md={12}>
               <Controller
+                id="password"
                 name="password"
                 label="Contraseña"
                 type="password"
@@ -79,7 +81,13 @@ const AuthenticationContainer = (props) => {
         <CardActions>
           <Box display="flex" justifyContent="flex-end" mt={3}>
             <Box position="relative" mr={1}>
-              <Button variant="contained" color="primary" disabled={authenticating} type="submit">
+              <Button
+                id="authenticate"
+                variant="contained"
+                color="primary"
+                disabled={authenticating}
+                type="submit"
+              >
                 <FontAwesomeIcon icon={faKey} />
                 Autenticar
               </Button>
